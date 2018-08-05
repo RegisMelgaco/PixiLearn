@@ -10,8 +10,14 @@
 
 <body>
     <script type="text/javascript">
-        // Create a PIXI app
-        let app = new PIXI.Application({
+        //Aliases
+        let Application = PIXI.Application,
+            loader = PIXI.loader,
+            resources = PIXI.loader.resources,
+            Sprite = PIXI.Sprite;
+
+        //Create a Pixi Application
+        let app = new Application({
             width: 256,
             height: 256,
             antialias: true,
@@ -19,19 +25,22 @@
             resolution: 1
         });
 
-        // Create canvas inside the body element
+        //Add the canvas that Pixi automatically created for you to the HTML document
         document.body.appendChild(app.view);
 
-        // load an image to cache as a sprite, than run setup function
+        //This `setup` function will run when the image has loaded
         const setup = () => {
-            let cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture);
 
+            //Create the cat sprite
+            let cat = new Sprite(resources["images/cat.png"].texture);
+
+            //Add the cat to the stage
             app.stage.addChild(cat);
-
-            setTimeout(() => app.stage.removeChild(cat), 3000)
         }
 
-        PIXI.loader.add("images/cat.png").load(setup);
+        //load an image and run the `setup` function when it's done
+        loader.add("images/cat.png").load(setup);
+
     </script>
 </body>
 
