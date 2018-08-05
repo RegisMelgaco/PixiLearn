@@ -32,14 +32,27 @@
         const setup = () => {
 
             //Create the cat sprite
-            let cat = new Sprite(resources["images/cat.png"].texture);
+            let cat = new Sprite(resources["cat"].texture);
+            let blob = new Sprite(resources["blob"].texture);
+            let explorer = new Sprite(resources["explorer"].texture);
 
             //Add the cat to the stage
             app.stage.addChild(cat);
+            app.stage.addChild(blob);
+            app.stage.addChild(explorer);
+        }
+
+        const LogLoadProgress = (loader, resources) => {
+            console.log("loading: " + resources.url);
+            console.log("progress: " + loader.progress + "%");
         }
 
         //load an image and run the `setup` function when it's done
-        loader.add("images/cat.png").load(setup);
+        loader.add([
+            {name: "cat", url: "images/cat.png"},
+            {name: "blob", url: "images/blob.png"},
+            {name: "explorer", url: "images/explorer.png"}
+            ]).on("progress", LogLoadProgress).load(setup);
 
     </script>
 </body>
