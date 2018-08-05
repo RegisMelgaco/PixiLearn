@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Sprites</title>
+</head>
+
+<script src="pixi.min.js"></script>
+
+<body>
+    <script type="text/javascript">
+        // Create a PIXI app
+        let app = new PIXI.Application({
+            width: 256,
+            height: 256,
+            antialias: true,
+            transparent: false,
+            resolution: 1
+        });
+
+        // Create canvas inside the body element
+        document.body.appendChild(app.view);
+
+        // load an image to cache as a sprite, than run setup function
+        const setup = () => {
+            let cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture);
+
+            app.stage.addChild(cat);
+
+            setTimeout(() => app.stage.removeChild(cat), 3000)
+        }
+
+        PIXI.loader.add("images/cat.png").load(setup);
+    </script>
+</body>
+
+</html>
